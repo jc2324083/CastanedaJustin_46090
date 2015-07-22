@@ -60,22 +60,22 @@ int main(int argc, char** argv) {
         cout<<endl;
         //Command 1 Attack
         if (command==1){
-            int attack=cAtk(10,1);
+            int attack=cAtk(10,1);      //Initiates Player's Attack
             cout<<"You did "<<attack<<" damage to the creature."<<endl;
-            monHP=monHP-attack;
-            int mAttack=mAtk(15,1);
+            monHP=monHP-attack;         //Subtracts from monster
+            int mAttack=mAtk(15,1);     //Initiates Monster's Attack
             cout<<"The Creature did "<<mAttack<<" damage to you."<<endl;
-            hp=hp-mAttack;
-            cStatus(hp,gp,nc);
+            hp=hp-mAttack;              //Subtracts from player
+            cStatus(hp,gp,nc);          //Displays current Status
             
         
         //Command 2 Healing
         }else if(command==2){
-            if(nc<1){
+            if(nc<1){       //When nc<1 the player can't recover no more
                 cout<<"You have no more Nova Crystals"<<endl;
             }else{
-                int healHP=50;
-                int healGP=15;
+                int healHP=50;      //Recovers HP
+                int healGP=15;      //Recovers GP
                 hp=hp+healHP;
                 gp=gp+15;
                 nc=nc-1;
@@ -84,7 +84,7 @@ int main(int argc, char** argv) {
 
         //Command 3 Charge Shot Takes two turns
         }else if(command==3){
-            if(gp<15){
+            if(gp<15){              //When GP is less then 15 Charge Attack cant be used
                 cout<<"You have no more GP to execute a charged attack!"<<endl<<endl;
             }else{
             //Charging Weapon Turn 1
@@ -93,17 +93,17 @@ int main(int argc, char** argv) {
             cout<<"The Creature did "<<mAttack<<" damage to you."<<endl<<endl;
             hp=hp-mAttack;
             cStatus(hp,gp,nc);
+            
             //Turn 2 Fire Charge Shot
             cout<<"Press any number to unleash charged attack! ";
-            cin>>anyKey;
-            int chargeA=chrgAtk(20,1);
+            cin>>anyKey;            //Continues Attack
+            int chargeA=chrgAtk(20,1);  //Initiates Player's Charge Attack
             cout<<"Your charge shot did "<<chargeA<<" damage to the creature."<<endl;
             monHP=monHP-chargeA;
-            
             int mAttck=mAtk(15,1);
             cout<<"The Creature did "<<mAttck<<" damage to you."<<endl<<endl;
             hp=hp-mAttck;
-            gp=gp-15;
+            gp=gp-15;               //Charge Attack uses 15 GP
             cStatus(hp,gp,nc);
             }
         }else{
@@ -118,6 +118,7 @@ int main(int argc, char** argv) {
         //Lost the game
         cout<<"The creature has defeated you!"<<endl;
         cout<<"------GAME OVER-----"<<endl;
+        
         }else if (monHP<=0){
         //Won the game
         cout<<"The creature falls and is defeated!!"<<endl;
