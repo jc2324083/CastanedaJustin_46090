@@ -21,18 +21,26 @@ int cAtk(int,int);
 int mAtk(int,int);
 int chrgAtk(int,int);
 void title();
+void begin();
 
 //Engage!
 int main(int argc, char** argv) {
     //Set Random Number
     srand(static_cast<unsigned int>(time(0)));
     
+    //Declare Array
+    const int SIZE=5;       //Size of the array
+    int shipPC[SIZE];       //Ship pass code
+    string map[5][5];          //Map OF SPACE!!(Space coordinates)
+    /*
+     Will feature a space travel between planets with coordinates from the array
+     */
+    
     //Declare and Initialize Variables
     int hp=175;             //User's Starting Health Power
     int gp=50;              //User's Starting Gun Power
     int nc=3;               //Number of Nova Crystal Shards
     int monHP=275;          //Monster's Starting Health Points
-    int monMP=100;          //Monster's Starting Dark Matter Points
     int command;            //Inputting command
     int anyKey;             //To continue
     
@@ -41,16 +49,8 @@ int main(int argc, char** argv) {
     cin.get();
     
     //Begin Game
-    cout<<"\t\t\t******Space Voyager******"<<endl;
-    cout<<"You received a distress signal from a ground station on Planet Bree "<<endl;
-    cout<<"from the Alpha Centauri star system. When arriving you find that the ground station "<<endl;
-    cout<<"was under attacked. Upon further searching you find a survivor on their last breath. "<<endl<<endl;
-    cout<<"Survivor:A CREATURE DID THIS!! It came from the valley and attacked us."<<endl;
-    cout<<"It must of came for our resources for energy. It thrives from the Nova Crystals "<<endl;
-    cout<<"that we mine here."<<endl<<endl;
-    cout<<"Filled with rage, you head out into the valley for revenge and encounter the creature."<<endl<<endl;
-    cout<<"All you have is your Galactic Gun and 3 Nova Crystal Shards(recovers 50 HP and 15 GP)"<<endl;
-    
+    begin();
+   
     //Battle Sequence
     do{
         //Selecting a command
@@ -59,6 +59,7 @@ int main(int argc, char** argv) {
         cout<<"Input command...";
         cin>>command;
         cout<<endl;
+        
         //Command 1 Attack
         if (command==1){
             int attack=cAtk(10,1);      //Initiates Player's Attack
@@ -123,7 +124,10 @@ int main(int argc, char** argv) {
         }else if (monHP<=0){
         //Won the game
         cout<<"The creature falls and is defeated!!"<<endl;
-        cout<<"---Thank you for playing!---"<<endl;
+        cout<<"You search the body and collect the missing Nova Crystals that"<<endl;
+        cout<<"the creature has stolen. You also find a security key to a door"<<endl;
+        cout<<"You return back to ground base and decide to use the key on the lock door"<<endl;
+        
         }        
     return 0;
 }
@@ -214,4 +218,19 @@ void title(){
     cout<<"                  *     Press Enter to Start   *            o      "<<endl;
     cout<<"o  +*     o           *               *             *o             "<<endl;
     cout<<"___________________________________________________________________"<<endl<<endl<<endl<<endl;
+}
+
+void begin(){
+    cout<<"\t\t\t******Space Voyager******"<<endl;
+    cout<<"You received a distress signal from a ground station on Planet Bree "<<endl;
+    cout<<"from the Alpha Centauri star system. When arriving you find that the "<<endl;
+    cout<<"ground station was under attacked. Upon further searching you find a survivor "<<endl;
+    cout<<"on their last breath."<<endl<<endl;
+    cout<<"Survivor:A CREATURE DID THIS!! It came from the valley and attacked "<<endl;
+    cout<<"us.It must of came for our resources for energy. It thrives off the"<<endl;
+    cout<<"Nova Crystals that we mine here."<<endl<<endl;
+    cout<<"Filled with rage, you head out into the valley for revenge and encounter"<<endl;
+    cout<<"the creature."<<endl<<endl;
+    cout<<"\tAll you have is your Galactic Gun and"<<endl;
+    cout<<"\t3 Nova Crystal Shards(recovers 50 HP and 15 GP)"<<endl;
 }
