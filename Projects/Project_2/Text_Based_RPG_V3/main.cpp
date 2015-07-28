@@ -9,6 +9,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
+#include <fstream>
+
 using namespace std;
 
 //User Libraries
@@ -22,6 +24,10 @@ int mAtk(int,int);
 int chrgAtk(int,int);
 void title();
 void begin();
+void starMap();
+void batIntro();
+int spcTrvl(int [][],int,int);
+
 
 //Engage!
 int main(int argc, char** argv) {
@@ -30,12 +36,16 @@ int main(int argc, char** argv) {
     
     //Declare Array
     const int SIZE=5;       //Size of the array
+    const int row=5;
+    const int colm=5;
     int shipPC[SIZE];       //Ship pass code
-    string map[5][5];          //Map OF SPACE!!(Space coordinates)
-    /*
-     Will feature a space travel between planets with coordinates from the array
-     */
+    int map[row][colm]{0,0,0,0,0, //Map OF SPACE!!(Space coordinates)
+                       0,1,0,0,0,
+                       0,0,0,0,0,
+                       0,0,0,2,0,
+                       0,0,0,0,0};          
     
+
     //Declare and Initialize Variables
     int hp=175;             //User's Starting Health Power
     int gp=50;              //User's Starting Gun Power
@@ -43,6 +53,7 @@ int main(int argc, char** argv) {
     int monHP=275;          //Monster's Starting Health Points
     int command;            //Inputting command
     int anyKey;             //To continue
+    int x,y;                //X and Y coordinates for array input
     
     //Output Game Intro
     title();
@@ -50,8 +61,18 @@ int main(int argc, char** argv) {
     
     //Begin Game
     begin();
-   
+    
+    //Space Travel with Arrays
+    starMap();   
+    do{
+        cin>>y>>x;
+        spcTrvl(map[row][colm],x,y);
+    }while(map[y][x]==2);
+        cout<<"You enter warp drive and when you came out of it you found yourself"<<endl;
+        cout<<"at your destination, Planet Bree."<<endl;
+    
     //Battle Sequence
+    batIntro();
     do{
         //Selecting a command
         cout<<endl;
@@ -204,6 +225,19 @@ int chrgAtk(int amin,int amax){
         }  
 }
 
+int spcTrvl(int a[][],int xx, int yy){
+ 
+        if(a[yy][xx]==0){
+            cout<<"You traveled to your destination. There is nothing here but a vast"<<endl;
+            cout<<"sea of blackness. You keep on searching..."<<endl;
+            starMap();
+        }else if(a[yy][xx]==1){
+            cout<<"You traveled and found a planet. This is in the data file as"<<endl;
+            cout<<"Planet XR30. It is uninhabitable and not the planet you are looking for."<<endl;
+            cout<<"You keep searching..."<<endl;
+            starMap();
+        }                
+}
 /******************************************************************************
  *                              Title Screen                                  *
  ******************************************************************************/
@@ -220,12 +254,22 @@ void title(){
     cout<<"___________________________________________________________________"<<endl<<endl<<endl<<endl;
 }
 
+/*******************************************************************************
+ *                              Game Intro                                     *
+ ******************************************************************************/
 void begin(){
     cout<<"\t\t\t******Space Voyager******"<<endl;
     cout<<"You received a distress signal from a ground station on Planet Bree "<<endl;
-    cout<<"from the Alpha Centauri star system. When arriving you find that the "<<endl;
-    cout<<"ground station was under attacked. Upon further searching you find a survivor "<<endl;
-    cout<<"on their last breath."<<endl<<endl;
+    cout<<"from the Alpha Centauri star system. You are in a 5X5 star map system"<<endl;
+    cout<<"Choose coordinates based on the X and Y plane to select your destination"<<endl;
+    cout<<"Distance and time is not a factor. Our warp drive technology is awesome"<<endl<<endl;
+    cout<<"\t\t\tPress Enter to open map"<<endl<<endl;
+    cin.get();
+}
+
+void batIntro(){
+    cout<<"When arriving you find that the ground station was under attacked."<<endl;
+    cout<<"Upon further searching you find a survivor on their last breath."<<endl<<endl;
     cout<<"Survivor:A CREATURE DID THIS!! It came from the valley and attacked "<<endl;
     cout<<"us.It must of came for our resources for energy. It thrives off the"<<endl;
     cout<<"Nova Crystals that we mine here."<<endl<<endl;
@@ -233,4 +277,30 @@ void begin(){
     cout<<"the creature."<<endl<<endl;
     cout<<"\tAll you have is your Galactic Gun and"<<endl;
     cout<<"\t3 Nova Crystal Shards(recovers 50 HP and 15 GP)"<<endl;
+}
+
+void starMap(){
+    cout<<"\t\t\t*=star\t+=star cluster\t(P)=planet"<<endl<<endl;
+    cout<<"Y ____________ ____________ _____________ _____________ ____________ "<<endl;
+    cout<<" |            |            | *           |    +        |   +        |"<<endl;
+    cout<<"0|  +    +    |      *     |   +         |            *|  *         |"<<endl;
+    cout<<" |____________|____________|_____________|_____________|____________|"<<endl;
+    cout<<"  ____________ ____________ _____________ _____________ ____________ "<<endl;
+    cout<<" |  *         |     +      |    *       *|+            | * *        |"<<endl;
+    cout<<"1|      +  +  |    (P) *   |          +  |    *       +|  *         |"<<endl;
+    cout<<" |____________|____________|_____________|_____________|____________|"<<endl;
+    cout<<"  ____________ ____________ _____________ _____________ ____________ "<<endl;
+    cout<<" |  *         |            |     + *     |      +      |      *+    |"<<endl;
+    cout<<"2|   *  +     |   *        |   *         |      *      |  +         |"<<endl;
+    cout<<" |____________|____________|_____________|_____________|____________|"<<endl;
+    cout<<"  ____________ ____________ _____________ _____________ ____________ "<<endl;
+    cout<<" |            |            |      *      |*            |   *      * |"<<endl;
+    cout<<"3|*           |         +  |   *+        |     (P)     |    +  +    |"<<endl;
+    cout<<" |____________|____________|_____________|_____________|____________|"<<endl;
+    cout<<"  ____________ ____________ _____________ _____________ ____________ "<<endl;
+    cout<<" |   *        |     *      |     +   *   |             |  +*+ +     |"<<endl;
+    cout<<"4|       ++   |  +        *|  *          |      * *    |*    **     |"<<endl;
+    cout<<" |____________|____________|_____________|_____________|____________|"<<endl;
+    cout<<"        0            1            2             3             4     X"<<endl<<endl;
+    cout<<"\tPlease input X and Y coordinates...";
 }
