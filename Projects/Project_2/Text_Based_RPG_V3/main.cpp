@@ -26,7 +26,7 @@ void title();
 void begin();
 void starMap();
 void batIntro();
-int spcTrvl(int [][],int,int);
+int spcTrvl(int [][5],int,int);
 
 
 //Engage!
@@ -39,11 +39,14 @@ int main(int argc, char** argv) {
     const int row=5;
     const int colm=5;
     int shipPC[SIZE];       //Ship pass code
-    int map[row][colm]{0,0,0,0,0, //Map OF SPACE!!(Space coordinates)
-                       0,1,0,0,0,
-                       0,0,0,0,0,
-                       0,0,0,2,0,
-                       0,0,0,0,0};          
+    int map[row][colm] ={{0,0,0,0,0},
+                    {0,1,0,0,0},
+                    {0,0,0,0,0},
+                    {0,0,0,2,0},
+                    {0,0,0,0,0}};
+    
+    
+    
     
 
     //Declare and Initialize Variables
@@ -53,7 +56,7 @@ int main(int argc, char** argv) {
     int monHP=275;          //Monster's Starting Health Points
     int command;            //Inputting command
     int anyKey;             //To continue
-    int x,y;                //X and Y coordinates for array input
+    int x=0,y=0;                //X and Y coordinates for array input
     
     //Output Game Intro
     title();
@@ -63,13 +66,9 @@ int main(int argc, char** argv) {
     begin();
     
     //Space Travel with Arrays
-    starMap();   
-    do{
-        cin>>y>>x;
-        spcTrvl(map[row][colm],x,y);
-    }while(map[y][x]==2);
-        cout<<"You enter warp drive and when you came out of it you found yourself"<<endl;
-        cout<<"at your destination, Planet Bree."<<endl;
+    starMap();
+    spcTrvl(map,x,y);
+   
     
     //Battle Sequence
     batIntro();
@@ -160,10 +159,10 @@ int main(int argc, char** argv) {
  *                       n=nc                 nova crystals
  *****************************************************************************/
 int cStatus(int h,int g, int n){
-    cout<<"________________________________________________"<<endl;
-    cout<<"***********Your HP is "<<h<<"/175***************"<<endl;
-    cout<<"***********Your GP is "<<g<<"/50****************"<<endl;
-    cout<<"***********You have "<<n<<" NCS left.************"<<endl<<endl;
+    cout<<"\t\t________________________________________________"<<endl;
+    cout<<"\t\t***********Your HP is "<<h<<"/175***************"<<endl;
+    cout<<"\t\t***********Your GP is "<<g<<"/50****************"<<endl;
+    cout<<"\t\t***********You have "<<n<<" NCS left.***********"<<endl<<endl;
 }
 
 /******************************************************************************
@@ -225,18 +224,24 @@ int chrgAtk(int amin,int amax){
         }  
 }
 
-int spcTrvl(int a[][],int xx, int yy){
- 
+int spcTrvl(int a[][5],int xx, int yy){
+    
+     do{
+        cout<<"\tPlease input X and Y coordinates...";
+        cin>>yy>>xx;
+        cout<<endl;
+        
         if(a[yy][xx]==0){
             cout<<"You traveled to your destination. There is nothing here but a vast"<<endl;
             cout<<"sea of blackness. You keep on searching..."<<endl;
-            starMap();
         }else if(a[yy][xx]==1){
             cout<<"You traveled and found a planet. This is in the data file as"<<endl;
             cout<<"Planet XR30. It is uninhabitable and not the planet you are looking for."<<endl;
             cout<<"You keep searching..."<<endl;
-            starMap();
-        }                
+        }     
+     }while(a[yy][xx]!=2);
+        cout<<"You enter warp drive and when you came out of it you found yourself"<<endl;
+        cout<<"at your destination, Planet Bree."<<endl; 
 }
 /******************************************************************************
  *                              Title Screen                                  *
@@ -302,5 +307,5 @@ void starMap(){
     cout<<"4|       ++   |  +        *|  *          |      * *    |*    **     |"<<endl;
     cout<<" |____________|____________|_____________|_____________|____________|"<<endl;
     cout<<"        0            1            2             3             4     X"<<endl<<endl;
-    cout<<"\tPlease input X and Y coordinates...";
+    
 }
