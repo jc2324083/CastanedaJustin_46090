@@ -36,16 +36,16 @@ int main(int argc, char** argv) {
     
     //Declare Array
     const int SIZE=5;       //Size of the array
-    const int row=5;
-    const int colm=5;
+    const int row=5;        //Rows in 2-d Array map
+    const int colm=5;       //Columns in 2-d array map  
     int shipPC[SIZE];       //Ship pass code
-    int map[row][colm] ={{0,0,0,0,0},
-                    {0,1,0,0,0},
-                    {0,0,0,0,0},
-                    {0,0,0,2,0},
-                    {0,0,0,0,0}};
+    int map[row][colm]={{0,0,0,0,0},     //2-D array, Star map for space travel!
+                        {0,1,0,0,0},     //0=empty space, 1 and 2 are planets
+                        {0,0,0,0,0},
+                        {0,0,0,2,0},
+                        {0,0,0,0,0}};
     
-    
+    //Initialize Ship's Pass code array
     
     
 
@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
     int monHP=275;          //Monster's Starting Health Points
     int command;            //Inputting command
     int anyKey;             //To continue
-    int x=0,y=0;                //X and Y coordinates for array input
+    int x=0,y=0;            //X and Y coordinates for array input
     
     //Output Game Intro
     title();
@@ -180,10 +180,8 @@ int cAtk(int amin,int amax){
     for (int atk=1;atk<=amax;atk++){
             sum=(rand()%amin+15);
             
-            return sum;
-            
-        }
-       
+            return sum;   
+        }    
 }
 /******************************************************************************
  *                              Monster Attack
@@ -201,8 +199,7 @@ int mAtk(int amin1,int amax1){
             mSum=(rand()%amin1+15);
             
             return mSum;
-        }
-       
+        }   
 }
 
 /******************************************************************************
@@ -235,7 +232,7 @@ int spcTrvl(int a[][5],int xx, int yy){
             cout<<"You traveled to your destination. There is nothing here but a vast"<<endl;
             cout<<"sea of blackness. You keep on searching..."<<endl;
         }else if(a[yy][xx]==1){
-            cout<<"You traveled and found a planet. This is in the data file as"<<endl;
+            cout<<"You traveled and found a planet. You go through your ship's records, its called"<<endl;
             cout<<"Planet XR30. It is uninhabitable and not the planet you are looking for."<<endl;
             cout<<"You keep searching..."<<endl;
         }     
@@ -264,8 +261,8 @@ void title(){
  ******************************************************************************/
 void begin(){
     cout<<"\t\t\t******Space Voyager******"<<endl;
-    cout<<"You received a distress signal from a ground station on Planet Bree "<<endl;
-    cout<<"from the Alpha Centauri star system. You are in a 5X5 star map system"<<endl;
+    cout<<"You received a distress signal from the Alpha Centauri star system, "<<endl;
+    cout<<"Search for the planet and save the day! You are in a 5X5 star map system"<<endl;
     cout<<"Choose coordinates based on the X and Y plane to select your destination"<<endl;
     cout<<"Distance and time is not a factor. Our warp drive technology is awesome"<<endl<<endl;
     cout<<"\t\t\tPress Enter to open map"<<endl<<endl;
@@ -274,7 +271,7 @@ void begin(){
 
 void batIntro(){
     cout<<"When arriving you find that the ground station was under attacked."<<endl;
-    cout<<"Upon further searching you find a survivor on their last breath."<<endl<<endl;
+    cout<<"Upon further searching you find a survivor."<<endl<<endl;
     cout<<"Survivor:A CREATURE DID THIS!! It came from the valley and attacked "<<endl;
     cout<<"us.It must of came for our resources for energy. It thrives off the"<<endl;
     cout<<"Nova Crystals that we mine here."<<endl<<endl;
