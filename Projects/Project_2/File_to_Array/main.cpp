@@ -33,10 +33,12 @@ void fileOpen(){
   int array[5];
   int i=0;
   while (i<5&&infile>>array[i]){
-      cout<<array[i]<<" ";
       i++;
   }
-
+  //
+  for (int j=0;j<5;j++){
+      cout<<array[j]<<" ";
+  }
 }
 
 

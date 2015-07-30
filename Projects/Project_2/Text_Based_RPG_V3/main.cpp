@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -27,6 +28,7 @@ void begin();
 void starMap();
 void batIntro();
 int spcTrvl(int [][5],int,int);
+int fileOpen(int []);
 
 
 //Engage!
@@ -35,10 +37,9 @@ int main(int argc, char** argv) {
     srand(static_cast<unsigned int>(time(0)));
     
     //Declare Array
-    const int SIZE=5;       //Size of the array
     const int row=5;        //Rows in 2-d Array map
-    const int colm=5;       //Columns in 2-d array map  
-    int shipPC[SIZE];       //Ship pass code
+    const int colm=5;       //Columns in 2-d array map 
+    int shipPC[5];          //Ships pass code
     int map[row][colm]={{0,0,0,0,0},     //2-D array, Star map for space travel!
                         {0,1,0,0,0},     //0=empty space, 1 and 2 are planets
                         {0,0,0,0,0},
@@ -147,7 +148,21 @@ int main(int argc, char** argv) {
         cout<<"You search the body and collect the missing Nova Crystals that"<<endl;
         cout<<"the creature has stolen. You also find a security key to a door"<<endl;
         cout<<"You return back to ground base and decide to use the key on the lock door"<<endl;
+        cout<<"You open up the door. All you find is a file with some coding. It reads:"<<endl;
         
+        //input file into array
+        fileOpen(shipPC);
+        //Output results
+        for (int j=0;j<5;j++){
+            cout<<shipPC[j]<<" ";
+            cout<<endl;
+        }
+        //Ending
+        cout<<"You input these codes into a nearby computer. The computer goes blank"<<endl;
+        cout<<"Everything shouts off and on the computer screen a message comes on:"<<endl<<endl;
+        cout<<"\tSKYNET HAS BEEN ACTIVATED.INITIATE HUMAN ANNILATION PROGRAM!"<<endl<<endl;
+        cout<<"\tGood job! You just doomed the entire human race!!"<<endl<<endl;
+        cout<<"\t\t\tGAME OVER"<<endl;
         }        
     return 0;
 }
@@ -305,4 +320,22 @@ void starMap(){
     cout<<" |____________|____________|_____________|_____________|____________|"<<endl;
     cout<<"        0            1            2             3             4     X"<<endl<<endl;
     
+}
+
+int fileOpen(int shipCode[]){
+  std::fstream infile;
+  infile.open("passcode.rtf");{
+    if(!infile){
+       std::cerr << "Error: file could not be opened" << std::endl;
+       exit(1);
+    }
+    std::cout << "File is open" << std::endl;
+  }
+  
+  int i=0;
+  while (i<5&&infile>>shipCode[i]){
+      i++;
+  }
+ 
+  return(shipCode[5]);
 }
