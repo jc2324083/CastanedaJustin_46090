@@ -45,10 +45,7 @@ int main(int argc, char** argv) {
                         {0,0,0,0,0},
                         {0,0,0,2,0},
                         {0,0,0,0,0}};
-    
-    //Initialize Ship's Pass code array
-    
-    
+
 
     //Declare and Initialize Variables
     int hp=175;             //User's Starting Health Power
@@ -152,17 +149,19 @@ int main(int argc, char** argv) {
         
         //input file into array
         fileOpen(shipPC);
-        //Output results
+        
+        //Output shipPC array
         for (int j=0;j<5;j++){
             cout<<shipPC[j]<<" ";
-            cout<<endl;
         }
+        cout<<endl;
+        
         //Ending
         cout<<"You input these codes into a nearby computer. The computer goes blank"<<endl;
         cout<<"Everything shouts off and on the computer screen a message comes on:"<<endl<<endl;
         cout<<"\tSKYNET HAS BEEN ACTIVATED.INITIATE HUMAN ANNILATION PROGRAM!"<<endl<<endl;
         cout<<"\tGood job! You just doomed the entire human race!!"<<endl<<endl;
-        cout<<"\t\t\tGAME OVER"<<endl;
+        cout<<"\t\t\t    GAME OVER"<<endl;
         }        
     return 0;
 }
@@ -236,6 +235,15 @@ int chrgAtk(int amin,int amax){
         }  
 }
 
+/*******************************************************************************
+ *                              2-D Array                                      *
+ * *****************************************************************************
+ *  Input user's coordinates and determine it's location in the array.         *
+ *      Declare Variables                                                      *
+ *      a[][]=map[5][5]                                                        *
+ *      xx= y coordinates                                                      *
+ *      yy= x coordinates                                                      *
+ *******************************************************************************/
 int spcTrvl(int a[][5],int xx, int yy){
     
      do{
@@ -284,6 +292,9 @@ void begin(){
     cin.get();
 }
 
+/*******************************************************************************
+ *                              Battle Intro                                   *
+ ******************************************************************************/
 void batIntro(){
     cout<<"When arriving you find that the ground station was under attacked."<<endl;
     cout<<"Upon further searching you find a survivor."<<endl<<endl;
@@ -296,6 +307,9 @@ void batIntro(){
     cout<<"\t3 Nova Crystal Shards(recovers 50 HP and 15 GP)"<<endl;
 }
 
+/*******************************************************************************
+ *                           Display 2-D star map                              *
+ *******************************************************************************/
 void starMap(){
     cout<<"\t\t\t*=star\t+=star cluster\t(P)=planet"<<endl<<endl;
     cout<<"Y ____________ ____________ _____________ _____________ ____________ "<<endl;
@@ -322,9 +336,18 @@ void starMap(){
     
 }
 
+/*******************************************************************************
+ *                              File Open                                      *
+ * *****************************************************************************
+ *  Reads numbers from a file and stores it in an array.                       *
+ *      Declare Variables                                                      *
+ *      std fstream infile                                                     *
+ *      file name passcode.txt                                                 *
+ *      i= counter for while loop                                              *
+ *******************************************************************************/
 int fileOpen(int shipCode[]){
   std::fstream infile;
-  infile.open("passcode.rtf");{
+  infile.open("passcode.txt");{
     if(!infile){
        std::cerr << "Error: file could not be opened" << std::endl;
        exit(1);
